@@ -1,0 +1,59 @@
+@model Raspador.Models.SnapshotInfo
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>SnapshotInfo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="NetWorth" class="control-label"></label>
+                <input asp-for="NetWorth" class="form-control" />
+                <span asp-validation-for="NetWorth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayGainChange" class="control-label"></label>
+                <input asp-for="DayGainChange" class="form-control" />
+                <span asp-validation-for="DayGainChange" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayGainPercent" class="control-label"></label>
+                <input asp-for="DayGainPercent" class="form-control" />
+                <span asp-validation-for="DayGainPercent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalGain" class="control-label"></label>
+                <input asp-for="TotalGain" class="form-control" />
+                <span asp-validation-for="TotalGain" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalGainPercent" class="control-label"></label>
+                <input asp-for="TotalGainPercent" class="form-control" />
+                <span asp-validation-for="TotalGainPercent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

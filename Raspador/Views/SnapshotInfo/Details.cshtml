@@ -1,0 +1,106 @@
+@model Raspador.Models.SnapshotInfo
+@* *@
+@* @{ *@
+@*     ViewData["Title"] = "Details"; *@
+@* } *@
+@* *@
+@* <h2>Details</h2> *@
+@* *@
+@* <div> *@
+@*     <h4>SnapshotInfo</h4> *@
+@*     <hr /> *@
+@*     <dl class="dl-horizontal"> *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.NetWorth) *@
+@*         </dt> *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.NetWorth) *@
+@*         </dd> *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.DayGainChange) *@
+@*         </dt> *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.DayGainChange) *@
+@*         </dd> *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.DayGainPercent) *@
+@*         </dt> *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.DayGainPercent) *@
+@*         </dd> *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.TotalGain) *@
+@*         </dt> *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.TotalGain) *@
+@*         </dd> *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.TotalGainPercent) *@
+@*         </dt> *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.TotalGainPercent) *@
+@*         </dd> *@
+@*         <dt> *@
+@*             @Html.DisplayNameFor(model => model.Date) *@
+@*         </dt> *@
+@*         <dd> *@
+@*             @Html.DisplayFor(model => model.Date) *@
+@*         </dd> *@
+@*     </dl> *@
+@* </div> *@
+@* <div> *@
+@*     $1$ <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> | #1# *@
+@*     <a asp-action="Index">Back to List</a> *@
+@* </div> *@
+
+@* @model StockViewModel *@
+
+@{
+    ViewData["Title"] = "Portfolio Details";
+}
+
+<div class="panel btn-default todo-panel">
+    <div class="panel-heading">@ViewData["Title"]</div>
+</div>
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <td>Symbol</td>
+        <td>Last Price</td>
+        <td>Price Change</td>
+        <td>Price Change %</td>
+        <td>Shares</td>
+        <td>Cost Basis</td>
+        <td>Market Value</td>
+        <td>Day Gain</td>
+        <td>Day Gain %</td>
+        <td>Total Gain</td>
+        <td>Total Gain %</td>
+        <td># of Lots</td>
+        <td>Notes</td>
+    </tr>
+    </thead>
+    
+    @foreach (var stock in Model.Stocks)
+    {
+        <tr>
+            <td>@stock.Symbol</td>
+            <td>@stock.LastPrice</td>
+            <td>@stock.PriceChange</td>
+            <td>@stock.PricePercentChange</td>
+            <td>@stock.Shares</td>
+            <td>@stock.CostBasis</td>
+            <td>@stock.MarketValue</td>
+            <td>@stock.DayGainChange</td>
+            <td>@stock.DayGainPercentChange</td>
+            <td>@stock.TotalGainChange</td>
+            <td>@stock.TotalGainPercentChange</td>
+            <td>@stock.NumOfLots</td>
+            <td>@stock.Notes</td>
+        </tr>
+    }
+</table>
+
+     <a asp-action="Index">Back to List</a>
+

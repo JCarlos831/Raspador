@@ -1,0 +1,106 @@
+@* @model IEnumerable<Raspador.Models.SnapshotInfo> *@
+@* *@
+@* @{ *@
+@*     ViewData["Title"] = "Index"; *@
+@* } *@
+@* *@
+@* <h2>Index</h2> *@
+@* *@
+@* <p> *@
+@*     <a asp-action="Create">Create New</a> *@
+@* </p> *@
+@* <table class="table"> *@
+@*     <thead> *@
+@*         <tr> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.NetWorth) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.DayGainChange) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.DayGainPercent) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.TotalGain) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.TotalGainPercent) *@
+@*             </th> *@
+@*             <th> *@
+@*                 @Html.DisplayNameFor(model => model.Date) *@
+@*             </th> *@
+@*             <th></th> *@
+@*         </tr> *@
+@*     </thead> *@
+@*     <tbody> *@
+@* @foreach (var item in Model) { *@
+@*         <tr> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.NetWorth) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.DayGainChange) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.DayGainPercent) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.TotalGain) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.TotalGainPercent) *@
+@*             </td> *@
+@*             <td> *@
+@*                 @Html.DisplayFor(modelItem => item.Date) *@
+@*             </td> *@
+@*             <td> *@
+@*                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | *@
+@*                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> | *@
+@*                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
+@*             </td> *@
+@*         </tr> *@
+@* } *@
+@*     </tbody> *@
+@* </table> *@
+
+@model SnapshotInfoViewModel
+
+@{
+    ViewData["Title"] = "Your Portfolio Snapshots";
+}
+
+<div>
+    @await Html.PartialAsync("AddSnapshotPartial", new SnapshotInfo())
+</div>
+
+<div class="panel panel-default todo-panel">
+    <div class="panel-heading">
+        @ViewData["Title"]
+    </div>
+    
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>Date</td>
+            <td>Net Worth</td>
+            <td>Day Gain</td>
+            <td>Day Gain %</td>
+            <td>Total Gain</td>
+            <td>Total Gain %</td>
+        </tr>
+        </thead>
+        
+        @foreach (var item in Model.Snapshots)
+        {
+            <tr>
+                <td><a asp-action="Details" asp-route-id="@item.Id">@item.Date</a></td>
+                <td>@item.NetWorth</td>
+                <td>@item.DayGainChange</td>
+                <td>@item.DayGainPercent</td>
+                <td>@item.TotalGain</td>
+                <td>@item.TotalGainPercent</td>
+            </tr>
+        }
+    </table>
+</div>
