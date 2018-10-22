@@ -1,0 +1,99 @@
+@model Raspador.Models.Stock
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Stock</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Symbol" class="control-label"></label>
+                <input asp-for="Symbol" class="form-control" />
+                <span asp-validation-for="Symbol" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastPrice" class="control-label"></label>
+                <input asp-for="LastPrice" class="form-control" />
+                <span asp-validation-for="LastPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PriceChange" class="control-label"></label>
+                <input asp-for="PriceChange" class="form-control" />
+                <span asp-validation-for="PriceChange" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PricePercentChange" class="control-label"></label>
+                <input asp-for="PricePercentChange" class="form-control" />
+                <span asp-validation-for="PricePercentChange" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Shares" class="control-label"></label>
+                <input asp-for="Shares" class="form-control" />
+                <span asp-validation-for="Shares" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CostBasis" class="control-label"></label>
+                <input asp-for="CostBasis" class="form-control" />
+                <span asp-validation-for="CostBasis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarketValue" class="control-label"></label>
+                <input asp-for="MarketValue" class="form-control" />
+                <span asp-validation-for="MarketValue" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayGainChange" class="control-label"></label>
+                <input asp-for="DayGainChange" class="form-control" />
+                <span asp-validation-for="DayGainChange" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DayGainPercentChange" class="control-label"></label>
+                <input asp-for="DayGainPercentChange" class="form-control" />
+                <span asp-validation-for="DayGainPercentChange" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalGainChange" class="control-label"></label>
+                <input asp-for="TotalGainChange" class="form-control" />
+                <span asp-validation-for="TotalGainChange" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalGainPercentChange" class="control-label"></label>
+                <input asp-for="TotalGainPercentChange" class="form-control" />
+                <span asp-validation-for="TotalGainPercentChange" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumOfLots" class="control-label"></label>
+                <input asp-for="NumOfLots" class="form-control" />
+                <span asp-validation-for="NumOfLots" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Notes" class="control-label"></label>
+                <input asp-for="Notes" class="form-control" />
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

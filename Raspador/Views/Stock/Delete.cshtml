@@ -1,0 +1,105 @@
+@model Raspador.Models.Stock
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Stock</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Symbol)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Symbol)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastPrice)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastPrice)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceChange)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PriceChange)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PricePercentChange)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PricePercentChange)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Shares)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Shares)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CostBasis)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CostBasis)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MarketValue)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MarketValue)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DayGainChange)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DayGainChange)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DayGainPercentChange)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DayGainPercentChange)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalGainChange)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalGainChange)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TotalGainPercentChange)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TotalGainPercentChange)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumOfLots)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumOfLots)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
