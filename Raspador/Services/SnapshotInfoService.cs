@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -92,52 +93,73 @@ namespace Raspador.Services
             newSnapshotInfo.Date = DateTime.Now;
             newSnapshotInfo.UserId = user.Id;
 
-            _context.Snapshots.Add(newSnapshotInfo);
+//            _context.Snapshots.Add(newSnapshotInfo);
 
-////            List<Stock> stock = new List<Stock>();
-//                List<string> stockRowData = new List<string>();
-//
-////            Find table
-//                var stockTable = driver.FindElement(By.ClassName("tJDbU "));
-//
-////            Find Table Rows
-//                var stockTableRows = new List<IWebElement>(stockTable.FindElements(By.TagName("tr")));
-//
-////            Go over each stockTableRow
-//                foreach (var stockTableRow in stockTableRows)
-//                {
-////                Get the columns in a stockTableRow
-//                    var stockTableColumns = new List<IWebElement>(stockTableRow.FindElements(By.TagName("td")));
-//
-//                    if (stockTableColumns.Count > 0)
-//                    {
-////                    Go over each column adding data to stockRowData
-//                        foreach (var stockTableColumn in stockTableColumns)
-//                        {
-//                            stockRowData.Add(stockTableColumn.Text);
-//                        }
-//
-//                        var stockRowColumn0 = stockRowData[0].Split("\n");
-//                        var stockRowColumn1 = stockRowData[1].Split("\n");
-//                        var stockRowColumn5 = stockRowData[5].Split("\n");
-//                        var stockRowColumn6 = stockRowData[6].Split("\n");
-//
-//                        var stockSymbol = stockRowColumn0[0];
-//                        var lastStockPrice = stockRowColumn0[1];
-//                        var stockPriceChange = stockRowColumn1[1];
-//                        var stockPricePercentageChange = stockRowColumn1[0];
-//                        var shares = stockRowData[2];
-//                        var costBasis = stockRowData[3];
-//                        var marketValue = stockRowData[4];
-//                        var stockDayGain = stockRowColumn5[1];
-//                        var stockDayGainPercentage = stockRowColumn5[0];
-//                        var stockTotalGain = stockRowColumn6[1];
-//                        var stockTotalGainPercentage = stockRowColumn6[0];
-//                        var stockNumofLots = stockRowData[7];
-//                        var stockNotes = stockRowData[8];
-//
-//                        // Adds a stock
-//
+            var SnapshotStocks = new List<Stock>();
+
+//            List<Stock> stock = new List<Stock>();
+                List<string> stockRowData = new List<string>();
+
+//            Find table
+                var stockTable = driver.FindElement(By.ClassName("tJDbU "));
+
+//            Find Table Rows
+                var stockTableRows = new List<IWebElement>(stockTable.FindElements(By.TagName("tr")));
+
+//            Go over each stockTableRow
+                foreach (var stockTableRow in stockTableRows)
+                {
+//                Get the columns in a stockTableRow
+                    var stockTableColumns = new List<IWebElement>(stockTableRow.FindElements(By.TagName("td")));
+
+                    if (stockTableColumns.Count > 0)
+                    {
+//                    Go over each column adding data to stockRowData
+                        foreach (var stockTableColumn in stockTableColumns)
+                        {
+                            stockRowData.Add(stockTableColumn.Text);
+                        }
+
+                        var stockRowColumn0 = stockRowData[0].Split("\n");
+                        var stockRowColumn1 = stockRowData[1].Split("\n");
+                        var stockRowColumn5 = stockRowData[5].Split("\n");
+                        var stockRowColumn6 = stockRowData[6].Split("\n");
+
+                        var stockSymbol = stockRowColumn0[0];
+                        var lastStockPrice = stockRowColumn0[1];
+                        var stockPriceChange = stockRowColumn1[1];
+                        var stockPricePercentageChange = stockRowColumn1[0];
+                        var shares = stockRowData[2];
+                        var costBasis = stockRowData[3];
+                        var marketValue = stockRowData[4];
+                        var stockDayGain = stockRowColumn5[1];
+                        var stockDayGainPercentage = stockRowColumn5[0];
+                        var stockTotalGain = stockRowColumn6[1];
+                        var stockTotalGainPercentage = stockRowColumn6[0];
+                        var stockNumofLots = stockRowData[7];
+                        var stockNotes = stockRowData[8];
+
+                        // Adds a stock
+                        
+                        SnapshotStocks.Add(new Stock()
+                        {
+                            Symbol = stockSymbol,
+                            LastPrice = lastStockPrice,
+                            PriceChange = stockPriceChange,
+                            PricePercentChange = stockPricePercentageChange,
+                            Shares = shares,
+                            CostBasis = costBasis,
+                            MarketValue = marketValue,
+                            DayGainChange = stockDayGain,
+                            DayGainPercentChange = stockDayGainPercentage,
+                            TotalGainChange = stockTotalGain,
+                            TotalGainPercentChange = stockTotalGainPercentage,
+                            NumOfLots = stockNumofLots,
+                            Notes = stockNotes,
+                            Date = DateTime.Now,
+                            UserId = user.Id
+                        });
+
 //                        newStock.Symbol = stockSymbol;
 //                        newStock.LastPrice = lastStockPrice;
 //                        newStock.PriceChange = stockPriceChange;
@@ -151,20 +173,28 @@ namespace Raspador.Services
 //                        newStock.TotalGainPercentChange = stockTotalGainPercentage;
 //                        newStock.NumOfLots = stockNumofLots;
 //                        newStock.Notes = stockNotes;
+//                        newStock.Date = DateTime.Now;
+//                        newStock.UserId = user.Id;
             
-//                        // Saves a stock
+                        // Saves a stock
 //                        _context.Stocks.Add(newStock);
+//                        await _context.SaveChangesAsync();
 
-//                    }
-//
-//                    stockRowData.Clear();
-//                }
+                    }
 
+                    stockRowData.Clear();
+                }
+            
+            
             driver.Quit();
+            newSnapshotInfo.Stocks = SnapshotStocks;
+            
+            _context.Snapshots.Add(newSnapshotInfo);
 
-            var saveResult = await _context.SaveChangesAsync();
-
+            
+            var saveResult = await _context.SaveChangesAsync();            
             return saveResult == 1;
+
         }
     }
 }

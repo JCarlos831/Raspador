@@ -61,12 +61,12 @@ namespace Raspador.Controllers
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser == null) return Challenge();
 
-            var successful = await _snapshotInfoService.AddSnapshotAsync(newSnapshotInfo, currentUser);
+            await _snapshotInfoService.AddSnapshotAsync(newSnapshotInfo, currentUser);
 
-            if (!successful)
-            {
-                return BadRequest("Could not add snapshot");
-            }
+//            if (!successful)
+//            {
+//                return BadRequest("Could not add snapshot");
+//            }
 
             return RedirectToAction("Index");
         }
@@ -80,10 +80,10 @@ namespace Raspador.Controllers
             }
 
             var snapshotInfo = await _context.Snapshots
-                .SingleOrDefaultAsync(m => m.Id == id);
+                .SingleOrDefaultAsync(m => m.SnapshotId == id);
 
             var stocks = from s in _context.Stocks
-                    .Where(x => x.SnapshotInfo.Id == id)
+                    .Where(x => x.SnapshotInfo.SnapshotId == id)
                 select s;
 
             if (snapshotInfo == null)
@@ -94,13 +94,13 @@ namespace Raspador.Controllers
             snapshotInfo.Stocks = await stocks.AsNoTracking().ToListAsync();
 
             return View(snapshotInfo);
-//        }
+        }
 //
-//        // GET: SnapshotInfo/Create
-//        public IActionResult Create()
-//        {
-//            return View();
-//        }
+        // GET: SnapshotInfo/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
 //
 //        // POST: SnapshotInfo/Create
 //        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -169,39 +169,38 @@ namespace Raspador.Controllers
 //            return View(snapshotInfo);
 //        }
 //
-//        // GET: SnapshotInfo/Delete/5
-//        public async Task<IActionResult> Delete(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return NotFound();
-//            }
-//
-//            var snapshotInfo = await _context.Snapshots
-//                .FirstOrDefaultAsync(m => m.Id == id);
-//            if (snapshotInfo == null)
-//            {
-//                return NotFound();
-//            }
-//
-//            return View(snapshotInfo);
-//        }
-//
-//        // POST: SnapshotInfo/Delete/5
-//        [HttpPost, ActionName("Delete")]
-//        [ValidateAntiForgeryToken]
-//        public async Task<IActionResult> DeleteConfirmed(int id)
-//        {
-//            var snapshotInfo = await _context.Snapshots.FindAsync(id);
-//            _context.Snapshots.Remove(snapshotInfo);
-//            await _context.SaveChangesAsync();
-//            return RedirectToAction(nameof(Index));
-//        }
-//
-//        private bool SnapshotInfoExists(int id)
-//        {
-//            return _context.Snapshots.Any(e => e.Id == id);
-//        }
+        // GET: SnapshotInfo/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var snapshotInfo = await _context.Snapshots
+                .FirstOrDefaultAsync(m => m.SnapshotId == id);
+            if (snapshotInfo == null)
+            {
+                return NotFound();
+            }
+
+            return View(snapshotInfo);
+        }
+
+        // POST: SnapshotInfo/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var snapshotInfo = await _context.Snapshots.FindAsync(id);
+            _context.Snapshots.Remove(snapshotInfo);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        private bool SnapshotInfoExists(int id)
+        {
+            return _context.Snapshots.Any(e => e.SnapshotId == id);
+        }
         }
     }
-}

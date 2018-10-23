@@ -94,12 +94,17 @@
         @foreach (var item in Model.Snapshots)
         {
             <tr>
-                <td><a asp-action="Details" asp-route-id="@item.Id">@item.Date</a></td>
+                <td>@item.Date</td>
                 <td>@item.NetWorth</td>
                 <td>@item.DayGainChange</td>
                 <td>@item.DayGainPercent</td>
                 <td>@item.TotalGain</td>
                 <td>@item.TotalGainPercent</td>
+                <td>
+                    @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | *@
+                    <a asp-action="Details" asp-route-id="@item.SnapshotId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.SnapshotId">Delete</a>
+                </td>
             </tr>
         }
     </table>

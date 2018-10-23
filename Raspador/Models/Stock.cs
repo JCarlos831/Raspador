@@ -20,6 +20,7 @@ namespace Raspador.Models
         public string NumOfLots { get; set; }
         public string Notes { get; set; }
         public DateTime Date { get; set; }
+//        public int SnapshotId { get; set; }
         
         public virtual SnapshotInfo SnapshotInfo { get; set; }
     }
