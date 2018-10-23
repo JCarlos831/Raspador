@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Raspador.Data;
 
 namespace Raspador.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181023003923_SnapshotInfoIdVsSnapShotId")]
+    partial class SnapshotInfoIdVsSnapShotId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,7 +239,7 @@ namespace Raspador.Migrations
 
                     b.Property<string>("Shares");
 
-                    b.Property<int?>("SnapshotInfoSnapshotId");
+                    b.Property<int>("SnapshotId");
 
                     b.Property<string>("Symbol");
 
@@ -249,7 +251,7 @@ namespace Raspador.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SnapshotInfoSnapshotId");
+                    b.HasIndex("SnapshotId");
 
                     b.ToTable("Stocks");
                 });
@@ -303,7 +305,8 @@ namespace Raspador.Migrations
                 {
                     b.HasOne("Raspador.Models.SnapshotInfo", "SnapshotInfo")
                         .WithMany("Stocks")
-                        .HasForeignKey("SnapshotInfoSnapshotId");
+                        .HasForeignKey("SnapshotId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

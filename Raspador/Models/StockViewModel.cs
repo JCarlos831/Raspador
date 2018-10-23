@@ -1,7 +1,9 @@
+using System.Collections.Generic;
+
 namespace Raspador.Models
 {
     public class StockViewModel
     {
-        public Stock[] Stocks { get; set; }
+        public List<Stock> Stocks { get; set; }
     }
 }

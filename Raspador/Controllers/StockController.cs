@@ -16,7 +16,7 @@ namespace Raspador.Controllers
     [Authorize]
     public class StockController : Controller
     {
-//        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly IStockService _stockService;
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -25,19 +25,20 @@ namespace Raspador.Controllers
 //            _context = context;
 //        }
 
-        public StockController(IStockService stockService, UserManager<IdentityUser> userManager)
+        public StockController(IStockService stockService, UserManager<IdentityUser> userManager, ApplicationDbContext context)
         {
             _stockService = stockService;
             _userManager = userManager;
+            _context = context;
         }
 
         // GET: Stock
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id)
         {
-            var currentUser = await _userManager.GetUserAsync(User);
-            if (currentUser == null) return Challenge();
+//            var currentUser = await _userManager.GetUserAsync(User);
+//            if (currentUser == null) return Challenge();
             
-            var stocks = await _stockService.GetStocksAsync(currentUser);
+            var stocks = await _stockService.GetStocksAsync(id);
 
             var model = new StockViewModel()
             {

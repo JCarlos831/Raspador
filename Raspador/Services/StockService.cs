@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -16,11 +17,14 @@ namespace Raspador.Services
             _context = context;
         }
 
-        public async Task<Stock[]> GetStocksAsync(IdentityUser user)
+        public async Task<List<Stock>> GetStocksAsync(int id)
         {
+            var snapshotId = id;
+            
             var stocks = await _context.Stocks
-                    .Where(x => x.UserId == user.Id)
-                    .ToArrayAsync();
+                    .Where(x => x.SnapshotInfo.SnapshotId == snapshotId)
+                    .AsNoTracking()
+                    .ToListAsync();
             return stocks;
         }
     }
