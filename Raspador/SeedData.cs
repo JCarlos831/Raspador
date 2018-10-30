@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-
 namespace Raspador
 {
     public static class SeedData
@@ -39,18 +38,18 @@ namespace Raspador
             UserManager<IdentityUser> userManager)
         {
             var testAdmin = await userManager.Users
-                .Where(x => x.UserName == "admin@raspador.local")
+                .Where(x => x.UserName == "raspa_admin@raspador.local")
                 .SingleOrDefaultAsync();
 
             if (testAdmin != null) return;
 
             testAdmin = new IdentityUser
             {
-                UserName = "admin@raspador.local",
-                Email = "admin@raspador.local"
+                UserName = "raspa_admin@raspador.local",
+                Email = "jcmontoya@gmail.com"
             };
             await userManager.CreateAsync(
-                testAdmin, "NotSecure123!!");
+                testAdmin, "r4Sp4d0r!!");
             await userManager.AddToRoleAsync(
                 testAdmin, Constants.AdministratorRole);
         }

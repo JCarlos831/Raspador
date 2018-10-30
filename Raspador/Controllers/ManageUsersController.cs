@@ -2,7 +2,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Raspador.Models;
@@ -25,7 +24,7 @@ namespace Raspador.Controllers
         {
             var admins = (await _userManager
                     .GetUsersInRoleAsync("Administrator"))
-                    .ToArray();
+                .ToArray();
 
             var everyone = await _userManager.Users
                 .ToArrayAsync();
