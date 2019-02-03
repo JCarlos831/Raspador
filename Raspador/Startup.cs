@@ -35,7 +35,12 @@ namespace Raspador
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            
+            /*
+             * string someString = Configuration.GetConnectionString("DefaultConnection");
+             * someString = someString + "Password=4K4DEMIK!"
+             */
+             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

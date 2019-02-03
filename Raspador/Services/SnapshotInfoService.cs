@@ -43,7 +43,15 @@ namespace Raspador.Services
                     "https://login.yahoo.com/?.src=finance&.intl=us&.done=https%3A%2F%2Ffinance.yahoo.com%2Fportfolios&add=1");
 
 //            Maximize Browser Window
-            driver.Manage().Window.Maximize();
+            try
+            {
+                driver.Manage().Window.Maximize();
+
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Window did not maximize");
+            }
 
 //            Wait 3 Seconds
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
@@ -55,10 +63,17 @@ namespace Raspador.Services
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
 
 //            Enter password
-            driver.FindElement(By.Id("login-passwd")).SendKeys("3eggWhites6Almonds" + Keys.Enter);
+            driver.FindElement(By.Name("password")).SendKeys("3eggWhites6Almonds" + Keys.Enter);
 
 //            Close popup
-            driver.FindElement(By.XPath("//*[@id=\"__dialog\"]/section/button")).Click();
+            try
+            {
+                driver.FindElement(By.XPath("//*[@id=\"__dialog\"]/section/button")).Click();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("No pop up window to close.");
+            }
 
 //            Click on "My Watchlist"
             driver.FindElement(By.XPath("//*[@id=\"main\"]/section/section/div[2]/table/tbody/tr/td[1]/a")).Click();
@@ -98,7 +113,7 @@ namespace Raspador.Services
             var SnapshotStocks = new List<Stock>();
 
 //            List<Stock> stock = new List<Stock>();
-                List<string> stockRowData = new List<string>();
+                List<String> stockRowData = new List<string>();
 
 //            Find table
                 var stockTable = driver.FindElement(By.ClassName("tJDbU "));
@@ -159,26 +174,6 @@ namespace Raspador.Services
                             Date = DateTime.Now,
                             UserId = user.Id
                         });
-
-//                        newStock.Symbol = stockSymbol;
-//                        newStock.LastPrice = lastStockPrice;
-//                        newStock.PriceChange = stockPriceChange;
-//                        newStock.PricePercentChange = stockPricePercentageChange;
-//                        newStock.Shares = shares;
-//                        newStock.CostBasis = costBasis;
-//                        newStock.MarketValue = marketValue;
-//                        newStock.DayGainChange = stockDayGain;
-//                        newStock.DayGainPercentChange = stockDayGainPercentage;
-//                        newStock.TotalGainChange = stockTotalGain;
-//                        newStock.TotalGainPercentChange = stockTotalGainPercentage;
-//                        newStock.NumOfLots = stockNumofLots;
-//                        newStock.Notes = stockNotes;
-//                        newStock.Date = DateTime.Now;
-//                        newStock.UserId = user.Id;
-            
-                        // Saves a stock
-//                        _context.Stocks.Add(newStock);
-//                        await _context.SaveChangesAsync();
 
                     }
 
